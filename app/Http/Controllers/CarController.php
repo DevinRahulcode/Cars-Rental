@@ -30,5 +30,24 @@ class CarController extends Controller
         return redirect()->back()->with('status','Car Details Added Successfully');
     }
 
+    public function cardata(){
+        $carData = Car::all();
+        return view('app',["cars" => $carData]);
+    }
+
+    public function viewcar(){
+        $viewcar = Car::all();
+        return view('viewcar',["viewcars" => $viewcar]);
+    }
+
+    public function search(Request $request){
+       
+        $carData = Car::where('name','like',"%$request->search%")->get(); 
+        return view('app',["cars" => $carData , 'search'=>$request->search]); 
+    }
+ 
+    
+
+
     }
 
